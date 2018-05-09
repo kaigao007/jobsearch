@@ -1,0 +1,87 @@
+/* html, body {
+  height: 100%;
+  width: 100%;
+  background:linear-gradient(-150deg,#f37435,#f4864f,#fea73c);
+} */
+#rhondaDiv {
+  /* height: 100%;
+  width: 100%; */
+  background:linear-gradient(-150deg,#f37435,#f4864f,#fea73c);
+}
+
+#Rhonda .format-plain span{
+  color: black;
+}
+
+#Rhonda .format-markdown p{
+  color: black;
+}
+/*From Yuan, above Changed by Kai */
+/* chaning line */
+.navbar {
+  border-radius: 0;
+  margin: 0;
+  border: 0;
+}
+.navbar-brand {
+  margin: 10px 40px;
+}
+.wc-header {
+  display: none
+}
+.wc-console {
+  background: rgba(255,255,255,0.35);
+  border-color: rgba(255,255,255,0);
+  height: 80px;
+}
+.wc-textbox {
+  margin: 10px auto;
+  background: white;
+  width: 50%
+}
+.wc-message-groups {
+  padding: 0;
+  top: 70px;
+}
+input.wc-shellinput {
+  margin-left: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+::placeholder {
+  color: black;
+}
+label.wc-upload, button.wc-send {
+  margin-top: 15px;
+}
+/* Message box styles */
+div.wc-message-from-me, div.wc-message-from-bot {
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 11px;
+}
+div.wc-message-from-me {
+  margin-right: 22%;
+  margin-left: 50%;
+}
+div.wc-message-from-bot {
+  margin-left: 22%;
+  margin-right: 50%;
+}
+.wc-message-content {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  background-color: white !important;
+}
+.point-right, .point-left {
+  fill: white !important;
+}
+div.format-markdown {
+  padding: 5px;
+}
+span.format-plain {
+  color: black;
+  padding: 5px;
+}
