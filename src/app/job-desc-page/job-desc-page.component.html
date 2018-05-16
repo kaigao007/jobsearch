@@ -7,11 +7,22 @@
     <div class="row">
       <div class="col-sm-12 col-md-10">
         <div class="video-cover border--round">
-          <div class="background-image-holder" style="background: url('../assets/img/cowork-5.jpg'); opacity: 1;"> <img alt="image" src="../assets/img/cowork-1.jpg"> </div>
-          <div class="video-play-icon"></div> <iframe  src="https://www.youtube.com/embed/6p45ooZOOPo" frameborder="0" allowfullscreen="allowfullscreen" width="420" height="315"></iframe> </div>
-          <!-- <div class=""></div> <iframe  src="https://www.youtube.com/embed/iHhcHTlGtRs" frameborder="0" allowfullscreen="allowfullscreen" width="420" height="315"></iframe> </div> -->
+          <div *ngIf="!playVideo; then showBackground else showVideo"></div>
+          <ng-template #showBackground>
+              <div class="background-image-holder" style="background: url('../assets/img/cowork-5.jpg'); opacity: 1; ">
+                <img alt="image" src="../assets/img/cowork-5.jpg"> </div>
+              <div class="video-play-icon" (click)="onPlay()"></div>
+              <iframe src="" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+          </ng-template>
+          <ng-template #showVideo>
+            <iframe [src]="safeUrl()" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+          </ng-template>
+        </div>
+        <!-- <div class=""></div> <iframe  src="https://www.youtube.com/embed/iHhcHTlGtRs" frameborder="0" allowfullscreen="allowfullscreen" width="420" height="315"></iframe> </div> -->
 
-          <div style="background: url('../assets/img/cowork-5.jpg'); opacity: 1;"><iframe src="https://www.youtube.com/embed/6p45ooZOOPo" frameborder="0" allowfullscreen width="420" height="315"></iframe></div>
+        <!-- <div style="background: url('../assets/img/cowork-5.jpg'); opacity: 1;">
+          <iframe src="https://www.youtube.com/embed/6p45ooZOOPo" frameborder="0" allowfullscreen width="420" height="315"></iframe>
+        </div> -->
       </div>
     </div>
   </div>
@@ -22,12 +33,19 @@
     <div class="row">
       <div class="col-sm-8 col-md-8">
         <h2>{{job.title}}</h2>
-        <p><b>{{job.job_location}} - Job Type: {{job.job_types[0]?.title}}<br></b></p>
+        <p>
+          <b>{{job.job_location}} - Job Type: {{job.job_types[0]?.title}}
+            <br>
+          </b>
+        </p>
         <p></p>
         <!-- <p><b>Apply Now (Add Button)</b></p> -->
-        <a class="btn type--uppercase btn--primary" [routerLink]="['/apply', jobId]" ><span class="btn__text">Apply NOw</span></a>
-        <br><br>
-        <div [innerHtml] = "job.description| safe:'html'">
+        <a class="btn type--uppercase btn--primary" [routerLink]="['/apply', jobId]">
+          <span class="btn__text">Apply NOw</span>
+        </a>
+        <br>
+        <br>
+        <div [innerHtml]="job.description| safe:'html'">
 
 
         </div>
@@ -35,8 +53,11 @@
       <div class="col-sm-4 col-md-3">
         <div class="text-block">
           <h5>Employer</h5>
-          <p><b>
-        {{job.employer.first_name}}</b><br></p>
+          <p>
+            <b>
+              {{job.employer.first_name}}</b>
+            <br>
+          </p>
         </div>
         <div class="text-block">
           <h5>Address</h5>
@@ -51,13 +72,18 @@
   </div>
 </section>
 <!-- <section class="text-center imagebg" data-gradient-bg="#f47436,#f68c1f,#f6b21f,#f47436"> -->
-  <section class="text-center imagebg bgAnimation" >
+<section class="text-center imagebg bgAnimation">
 
   <div class="container">
     <div class="row">
       <div class="col-sm-8 col-md-6">
         <div class="cta">
-          <h2>Apply for a <b>good job</b> now.</h2> <a class="btn type--uppercase btn--primary" [routerLink]="['/apply', jobId]" ><span class="btn__text">Apply NOw</span></a> </div>
+          <h2>Apply for a
+            <b>good job</b> now.</h2>
+          <a class="btn type--uppercase btn--primary" [routerLink]="['/apply', jobId]">
+            <span class="btn__text">Apply NOw</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
