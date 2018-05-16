@@ -7,50 +7,57 @@
     <div class="row">
       <div class="col-sm-12 col-md-10">
         <div class="video-cover border--round">
-          <div class="background-image-holder"> <img alt="image" src="../assets/img/cowork-5.jpg"> </div>
-          <div class="video-play-icon"></div> <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowfullscreen="allowfullscreen"></iframe> </div>
+          <div class="background-image-holder" style="background: url('../assets/img/cowork-5.jpg'); opacity: 1;"> <img alt="image" src="../assets/img/cowork-1.jpg"> </div>
+          <div class="video-play-icon"></div> <iframe  src="https://www.youtube.com/embed/6p45ooZOOPo" frameborder="0" allowfullscreen="allowfullscreen" width="420" height="315"></iframe> </div>
+          <!-- <div class=""></div> <iframe  src="https://www.youtube.com/embed/iHhcHTlGtRs" frameborder="0" allowfullscreen="allowfullscreen" width="420" height="315"></iframe> </div> -->
+
+          <div style="background: url('../assets/img/cowork-5.jpg'); opacity: 1;"><iframe src="https://www.youtube.com/embed/6p45ooZOOPo" frameborder="0" allowfullscreen width="420" height="315"></iframe></div>
       </div>
     </div>
   </div>
 </section>
+<!-- <div>test jobId: {{jobId}}</div> -->
 <section class="switchable">
   <div class="container">
     <div class="row">
       <div class="col-sm-8 col-md-8">
-        <h2>Mechanical Installer</h2>
-        <p><b>Ottawa, Ontario - Full-time<br></b></p>
-        <p><b><br></b></p>
-        <p><b>Apply Now (Add Button)</b></p>
-        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis commodo, metus vitae blandit finibus, sem purus vulputate mauris, quis gravida sem metus eget quam. In et lacus vitae dui porta iaculis. Vestibulum dapibus suscipit porttitor. Nam
-          eu mollis lorem. <br><br>Maecenas elementum ex et arcu laoreet, non aliquet elit ornare. Vivamus mattis magna eget justo iaculis, in porta mi elementum. Pellentesque consectetur, diam sed mattis eleifend, ex ante eleifend augue, vitae tempor
-          sem lectus ac eros.<br><br>Proin vestibulum turpis ac nunc accumsan, eu euismod erat porttitor. Fusce gravida, arcu vel iaculis dictum, ex nibh porttitor odio, eget vehicula mauris nulla et purus. Mauris bibendum odio sapien, in sollicitudin
-          magna ultricies in. Praesent tincidunt augue in urna rutrum consectetur. Cras bibendum congue tortor id semper. Pellentesque congue ultrices velit ac interdum.<br><br>Vivamus et leo pretium, rhoncus purus quis, tristique dui. Phasellus quam
-          sapien, vulputate id dui sit amet, posuere congue turpis. Sed vel lorem feugiat, condimentum tellus quis, tempor risus.<br><br><i>Posted 18 days ago</i></p>
+        <h2>{{job.title}}</h2>
+        <p><b>{{job.job_location}} - Job Type: {{job.job_types[0]?.title}}<br></b></p>
+        <p></p>
+        <!-- <p><b>Apply Now (Add Button)</b></p> -->
+        <a class="btn type--uppercase btn--primary" [routerLink]="['/apply', jobId]" ><span class="btn__text">Apply NOw</span></a>
+        <br><br>
+        <div [innerHtml] = "job.description| safe:'html'">
+
+
+        </div>
       </div>
       <div class="col-sm-4 col-md-3">
         <div class="text-block">
           <h5>Employer</h5>
           <p><b>
-        IMI - A global people company</b><br></p>
+        {{job.employer.first_name}}</b><br></p>
         </div>
         <div class="text-block">
           <h5>Address</h5>
-          <p>Suit 100 495 Richmond rd.<br>Ottawa Ontario, Canada<br>K2J6C9</p>
+          <p>{{job.job_location}}</p>
         </div>
         <div class="text-block">
           <h5>Salary</h5>
-          <p>$61,000</p>
+          <p>{{job.pay_rate_type | capitalize |removeMinus }}</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-<section class="text-center imagebg" data-gradient-bg="#f47436,#f68c1f,#f6b21f,#f47436">
+<!-- <section class="text-center imagebg" data-gradient-bg="#f47436,#f68c1f,#f6b21f,#f47436"> -->
+  <section class="text-center imagebg bgAnimation" >
+
   <div class="container">
     <div class="row">
       <div class="col-sm-8 col-md-6">
         <div class="cta">
-          <h2>Apply for a <b>good job</b> now.</h2> <a class="btn type--uppercase btn--primary" href="imiapply.html"><span class="btn__text">Apply NOw</span></a> </div>
+          <h2>Apply for a <b>good job</b> now.</h2> <a class="btn type--uppercase btn--primary" [routerLink]="['/apply', jobId]" ><span class="btn__text">Apply NOw</span></a> </div>
       </div>
     </div>
   </div>

@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
-import { AuthInterceptor } from '../interceptors/auth.service';
-import { DataService } from '../shared/data.service';
 
+import { DataService } from '../shared/data.service';
+import { Http,Headers, Response } from '@angular/http';
+import 'rxjs/Rx';
 
 @Component({
   selector: 'app-search',
@@ -15,66 +11,116 @@ import { DataService } from '../shared/data.service';
 })
 export class SearchComponent implements OnInit {
 
-  url:string = "https://app.tradedesk.io/api/job?search=&location__city=Ottawa";
+  urlBase:string = "https://app.tradedesk.io/api/job";
 
-  dataSource:Observable<any>;
-  jobs:Array<any> = [];
+  jobs:any;
+  dataSource:any;
+  jobsStatic:Array<any> = [];
+  parser = new DOMParser();
+  keyword:string = "";
+  city:string = "";
+  locationLong:string = "";
 
-  constructor(
-              private dataService: DataService
+  constructor(  private http: Http,
+                private dataService:DataService
+  ) {}
 
-  ) {
+  getJobsLocal(keyword:string, location:string){
+    let myHeaders: Headers = new Headers();
+    myHeaders.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
+    console.log(keyword);
+    console.log(location);
+    console.log(this.urlBase+"?search="+ keyword +location)
 
-    // let myHeaders: Headers = new Headers();
-    // myHeaders.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
-    //
-    // let myHeaders2:HttpHeaders =new HttpHeaders();
-    // myHeaders2.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
-    //
-    //
-    // let newHeaders = new Headers({
-    //                               "Authorization": "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e"
-    //
-    //                             });
+    // return this.http.get("https://app.tradedesk.io/api/job?search=&location__city=Ottawa", {headers: myHeaders})
+    return this.http.get(this.urlBase+"?search="+ keyword +location +"&page_size=20" , {headers: myHeaders})
 
-
-    // this.dataSource = this.http.get("https://app.tradedesk.io/api/job?search=&location__city=Ottawa", {headers: newHeaders})
-    //   .map((res)=>res.json());
-   // this.dataSource = this.authHttp.get("https://app.tradedesk.io/api/job?search=&location__city=Ottawa", {headers: myHeaders2})
-   //   // .map((res)=>res.json(res));
-   //   .map(data => data);
-
-
-    // this.dataSource = this.http.get("https://trackr-pa.firebaseio.com/pausers.json")
-    //   .map((res)=>res.json());
-
-
-
+    .map(
+      (response: Response) => {
+        const data = response.json();
+        this.dataSource = data;
+        return data;
+      }
+    )
   }
 
   ngOnInit() {
-    this.dataService.getJobs()
+
+        this.jobs = this.dataService.getJobs();
+        console.log(this.jobs);
+
+    // this.getJobsLocalLocal()
+    //   .subscribe(
+    //     (data)=> {
+    //       this.dataSource = data.results;
+    //       console.log(this.dataSource);
+    //       console.log(data);
+    //     }
+    //   )
+
+    // console.log(this.dataSource);
+    //
+    // console.log(this.dataService.getStaticData().results);
+    // this.jobsStatic = this.dataService.getStaticData().results;
+    // console.log(this.jobsStatic[0].description);
+    // console.log(this.jobsStatic[0].description);
+
+//     const htmlDoc = this.parser.parseFromString(this.jobsStatic[0].description, "text/html");
+//     const summary = htmlDoc.getElementsByTagName('span')[1].innerHTML.replace(/<br>/g, " ");
+// console.log(summary);
+// replace this.str with the string you want to parse
+
+    // console.log(this.jobsStatic[0].description.getElementsByTagName("span")[1].innerHTML );
+
+  }
+  // onClick(){
+  //   this.dataService.getJobs()
+  //     .subscribe(
+  //       (jobs: any[])=> {
+  //         console.log(jobs);
+  //         this.dataSource = jobs;
+  //         console.log(jobs[0].title);
+  //       },
+  //       (error) => console.log(error)
+  //
+  //
+  //     )
+  // }
+
+
+  onSubmit(value:any){
+    // console.log(value);
+    this.keyword = value.keyword;
+    // this.city = value.location;
+
+    //capitalize location city
+    // console.log(value.location);
+    const location = value.location.charAt(0).toUpperCase() + value.location.toLowerCase().slice(1);
+    console.log(location);
+    if(location){
+       this.locationLong = "&location__city=" +  location;
+    }
+
+    this.dataService.getJobsFromTradedesk(value.keyword, this.locationLong)
       .subscribe(
-        (data)=> {
-          console.log(data);
+        (data)=>{
+          // this.dataSource = data;
+          this.jobs = data;
+          // console.log(data);
         }
       )
-    // this.authInterceptor.intercept(this.url, )
-    //   .subscribe()
-    // this.dataSource.subscribe(
-    //   (data)=>{this.jobs = data;
-    //     console.log(this.jobs);
-    //   }
-    // )
 
-  }
-  linkOnCliked(){
-    location.reload();
+    // this.getJobsLocal(value.keyword, this.locationLong)
+    //   .subscribe(
+    //     (data)=> {
+    //       this.dataSource = data.results;
+    //       console.log(this.dataSource);
+    //       console.log(data);
+    //     }
+    //   )
 
-  }
-  onSubmit(value:any){
-    console.log(value);
-
+    this.locationLong = "";
+    value.keyword = "";
   }
 
 }

@@ -1,16 +1,51 @@
-
 <section class="text-center bg--secondary space--xs">
   <div class="container">
     <div class="row">
       <form #searchForm="ngForm" (ngSubmit)="onSubmit(searchForm.value)">
-        <div class="col-sm-4"> <input ngModel name="keyword" type="text"placeholder="job title, keywords, or company"> </div>
-        <div class="col-sm-4"> <input ngModel name="location" type="text"  placeholder="city, state or province"> </div>
+        <div class="col-sm-4"> <input ngModel name="keyword" type="text" placeholder="job title, keywords, or company"> </div>
+        <div class="col-sm-4"> <input ngModel name="location" type="text" placeholder="city, state or province"> </div>
         <div class="col-sm-4"> <button type="submit" class="btn btn--primary type--uppercase">Get Hired</button> </div>
       </form>
     </div>
   </div>
 </section>
-<section class="switchable feature-large">
+<!-- <button class="btn btn--primary" type="button" name="button" (click)="onClick()">Get jobs</button> -->
+
+<div>
+  <!-- {{dataSource[0]?.title}} -->
+</div>
+<!-- <div >
+  <div></div>
+
+</div> -->
+
+<section *ngFor="let job of jobs" class="switchable feature-large">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <div class="video-cover border--round box-shadow-wide">
+          <div class="background-image-holder"style="background: url('../assets/img/blog-3.jpg'); opacity: 1;"> <img alt="image" src="../assets/img/blog-3.jpg"> </div>
+          <div class="video-play-icon"></div> <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowfullscreen="allowfullscreen"></iframe> </div>
+      </div>
+      <div class="col-sm-6 col-md-5">
+        <div class="switchable__text">
+          <h2>{{job.title}}</h2>
+          <p><b>Salary: {{job.pay_rate_type | capitalize |removeMinus }}  <span class="pull-right">Job Type: {{job.job_types[0]?.title}}</span></b></p>
+          <p><b>Start Date: {{job.start_date}}  <span class="pull-right">Employer: {{job.employer.first_name}}</span></b></p>
+          <p><b>Location: {{job.job_location}}</b></p>
+          <br>
+          <p><b><a [routerLink]="['/description', job.id]"  style="text-decoration:none">Apply Easily &gt;&gt;</a></b></p>
+          <!-- {{job.description | extractSpan }}  -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <hr><hr> -->
+
+<!-- above changed -->
+<!-- <section class="switchable feature-large">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-xs-12">
@@ -27,6 +62,7 @@
     </div>
   </div>
 </section>
+
 
 <section class="switchable feature-large bg--secondary space--xs">
   <div class="container">
@@ -98,7 +134,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="cta cta-4 space--xxs border--bottom text-right">
   <div class="container">

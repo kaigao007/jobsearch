@@ -17,12 +17,17 @@ import { SearchComponent } from './search/search.component';
 import { DescBgPartComponent } from './desc-bg-part/desc-bg-part.component';
 import { AuthInterceptor } from './interceptors/auth.service';
 import { DataService } from './shared/data.service';
+import { CapitalizePipe } from './pipe/capitalize.pipe';
+import { ExtractSpanPipe } from './pipe/extract-span.pipe';
+import { RemoveMinusPipe } from './pipe/remove-minus.pipe';
+import { SafeHtmlPipe } from './pipe/safe-html.pipe';
+import { SafePipe } from './pipe/safe.pipe';
 
 
 const routeConfig:Routes=[
   {path:'',component:JobListPageComponent},
-  {path:'description',component:JobDescPageComponent},
-  {path:'apply',component:JobApplyPageComponent}
+  {path:'description/:id',component:JobDescPageComponent},
+  {path:'apply/:id',component:JobApplyPageComponent}
 
 ]
 
@@ -37,7 +42,12 @@ const routeConfig:Routes=[
     JobDescPageComponent,
     JobApplyPageComponent,
     SearchComponent,
-    DescBgPartComponent
+    DescBgPartComponent,
+    CapitalizePipe,
+    ExtractSpanPipe,
+    RemoveMinusPipe,
+    SafeHtmlPipe,
+    SafePipe
   ],
   imports: [
     BrowserModule,
