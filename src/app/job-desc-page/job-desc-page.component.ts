@@ -19,6 +19,7 @@ export class JobDescPageComponent implements OnInit {
 
 
   playVideo: boolean = false;
+  jobAvailable: boolean = false;
 
   constructor(private dataService: DataService,
     // private elementRef: ElementRef,
@@ -33,7 +34,9 @@ export class JobDescPageComponent implements OnInit {
     //     document.body.appendChild(testScript);
   }
 
-  
+  safeUrl() {
+    return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  }
 
   ngOnInit() {
     // var s = document.createElement("script");
@@ -41,10 +44,22 @@ export class JobDescPageComponent implements OnInit {
     // s.src = "https://cdnjs.cloudflare.com/ajax/libs/granim/1.1.0/granim.min.js";
     // this.elementRef.nativeElement.appendChild(s);
 
-
-    this.jobId = this.routeInfo.snapshot.params["id"];
+    this.jobAvailable = false;
+    this.routeInfo.params.subscribe(
+      params => {
+        this.jobId = +params['id'];
+        this.dataService.getJobWithId(this.jobId).then(
+          data => {
+            this.job = data;
+          }, err => {
+            console.log(err);
+          }
+        );
+      }
+    )
+    /* this.jobId = this.routeInfo.snapshot.params["id"];
     this.job = this.dataService.getJob(this.jobId);
-    console.log(this.job);
+    console.log(this.job); */
 
     // location.reload();
     // let win = (window as any);
@@ -65,9 +80,6 @@ export class JobDescPageComponent implements OnInit {
     this.playVideo = true;
   }
 
-  safeUrl() {
-    return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
-  }
 
   // ngOnInit1() {
   //   // var s = document.createElement("script");

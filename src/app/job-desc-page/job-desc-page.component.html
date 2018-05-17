@@ -9,10 +9,10 @@
         <div class="video-cover border--round">
           <div *ngIf="!playVideo; then showBackground else showVideo"></div>
           <ng-template #showBackground>
-              <div class="background-image-holder" style="background: url('../assets/img/cowork-5.jpg'); opacity: 1; ">
-                <img alt="image" src="../assets/img/cowork-5.jpg"> </div>
-              <div class="video-play-icon" (click)="onPlay()"></div>
-              <iframe src="" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+            <div class="background-image-holder" style="background: url('../assets/img/cowork-5.jpg'); opacity: 1; ">
+              <img alt="image" src="../assets/img/cowork-5.jpg"> </div>
+            <div class="video-play-icon" (click)="onPlay()"></div>
+            <iframe src="" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
           </ng-template>
           <ng-template #showVideo>
             <iframe [src]="safeUrl()" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
@@ -29,7 +29,7 @@
 </section>
 <!-- <div>test jobId: {{jobId}}</div> -->
 <section class="switchable">
-  <div class="container">
+  <div class="container" *ngIf="job">
     <div class="row">
       <div class="col-sm-8 col-md-8">
         <h2>{{job.title}}</h2>

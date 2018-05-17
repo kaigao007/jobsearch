@@ -5,38 +5,55 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class DataService {
-  jobs:any[];
+  jobs: any[];
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
 
-  getJobsFromTradedesk(keyword:string, location:string) {
+  }
+  // "?id=234134" or "?job=14412"
+  getJobsFromTradedesk(keyword: string, location: string) {
     let myHeaders: Headers = new Headers();
     myHeaders.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
 
-    return this.http.get("https://app.tradedesk.io/api/job"+"?search="+ keyword +location +"&page_size=80" , { headers: myHeaders })
+    return this.http.get("https://app.tradedesk.io/api/job" + "?search=" + keyword + location + "&page_size=80", { headers: myHeaders })
       .map(
-      (response: Response) => {
-        const data = response.json().results;
-        console.log(data);
-        this.jobs = data;
-        return data;
-      }
+        (response: Response) => {
+          const data = response.json().results;
+          // console.log(data);
+          this.jobs = data;
+          return data;
+        }
       )
       .catch(
         (error: Response) => {
 
-        // console.log(error);
-        return Observable.throw(error);
+          // console.log(error);
+          return Observable.throw(error);
         }
       )
   }
-  getJobs(){
+  getJobs() {
     return this.jobs;
   }
 
-  getJob(id:number){
-    console.log(this.jobs);
-    return this.jobs.find((job)=>job.id == id);
+  getJob(id: number) {
+    return this.jobs.find((job) => job.id == id);
+  }
+
+  getJobWithId(id: number) {
+    let myHeaders: Headers = new Headers();
+    myHeaders.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
+
+    return new Promise((resolve, reject) => {
+      this.http.get("https://app.tradedesk.io/api/job" + "/?id=" + id, { headers: myHeaders }).map(res => res.json()).subscribe(
+        data => {
+          resolve(data.results[0]);
+        },
+        err => {
+          reject(err);
+        }
+      )
+    })
   }
 
   getStaticData() {
@@ -299,8 +316,5 @@ export class DataService {
       "new_job_count": 0
     }
   }
-
-
-
 
 }
