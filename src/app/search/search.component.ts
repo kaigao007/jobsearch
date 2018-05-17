@@ -106,7 +106,7 @@ export class SearchComponent implements OnInit {
 
     //capitalize location city
     // console.log(value.location);
-    const location = value.location.charAt(0).toUpperCase() + value.location.toLowerCase().slice(1);
+    const location = value.location.replace(/\s+/g, '%20'); //.charAt(0).toUpperCase() + value.location.toLowerCase().slice(1); //remove this comment if the backend become case insensitive
     console.log(location);
     if(location){
        this.locationLong = "&location__city=" +  location;
