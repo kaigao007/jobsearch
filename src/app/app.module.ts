@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import { AppComponent } from './app.component';
@@ -55,6 +55,7 @@ const routeConfig:Routes=[
     FormsModule,
     HttpModule,
     HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [
     DataService

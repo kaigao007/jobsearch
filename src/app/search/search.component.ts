@@ -13,7 +13,9 @@ export class SearchComponent implements OnInit {
 
   urlBase:string = "https://app.tradedesk.io/api/job";
 
-  jobs:any;
+  jobs:any[];
+  p:number = 1;
+
   dataSource:any;
   jobsStatic:Array<any> = [];
   parser = new DOMParser();
@@ -45,6 +47,15 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.dataService.getJobsFromTradedesk("", "")
+      .subscribe(
+        (data)=>{
+          // this.dataSource = data;
+          this.jobs = data;
+          // console.log(data);
+        }
+      )
 
         this.jobs = this.dataService.getJobs();
         console.log(this.jobs);

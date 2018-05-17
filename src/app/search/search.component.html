@@ -19,7 +19,7 @@
 
 </div> -->
 
-<section *ngFor="let job of jobs" class="switchable feature-large">
+<section *ngFor="let job of jobs | paginate:{itemsPerPage:10, currentPage:p}" class="switchable feature-large">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-xs-12">
@@ -41,6 +41,7 @@
     </div>
   </div>
 </section>
+<pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
 
 <!-- <hr><hr> -->
 
@@ -139,7 +140,7 @@
 <section class="cta cta-4 space--xxs border--bottom text-right">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12"> <span>Results Page: 1 2 3 4 5 <b>Next »</b></span> </div>
+      <!-- <div class="col-sm-12"> <span>Results Page: 1 2 3 4 5 <b>Next »</b></span> </div> -->
     </div>
   </div>
 </section>
