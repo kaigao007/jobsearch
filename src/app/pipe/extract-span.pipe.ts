@@ -10,12 +10,16 @@ export class ExtractSpanPipe implements PipeTransform {
   transform(value: string, args?: any): any {
 
     const htmlDoc = this.parser.parseFromString(value, "text/html");
-    if(htmlDoc.getElementsByTagName('span')[1].innerHTML){
-      const summary = htmlDoc.getElementsByTagName('span')[1].innerHTML.replace(/<br>/g, " ");
-      const summaryShort =summary.substring(0, 120);
-      return summaryShort.substring(0, summaryShort.lastIndexOf(" ")) + "...";
+    if(htmlDoc.getElementsByTagName('span')[1]){
+      if(htmlDoc.getElementsByTagName('span')[1].innerHTML){
+        const summary = htmlDoc.getElementsByTagName('span')[1].innerHTML.replace(/<br>/g, " ");
+        const summaryShort =summary.substring(0, 150);
+        return summaryShort.substring(0, summaryShort.lastIndexOf(" ")) + "...";
 
+      }
     }
+
+
     // console.log(summary);
 
     // console.log(this.truncateStr(summary));

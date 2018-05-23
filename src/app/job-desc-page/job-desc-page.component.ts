@@ -12,7 +12,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class JobDescPageComponent implements OnInit {
   jobId: number;
   job: any;
-  url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1";
+  url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1&mute=0";
+  // url: string = "https://www.youtube.com/embed/a2e0lokMiV0?autoplay=1&mute=0";
+
+
+
   url2: string = "https://www.youtube.com/embed/6p45ooZOOPo"
   // videoURL:string = "https://www.youtube.com/watch?v=NuIAYHVeFYs";
   videoURL: string = "https://www.youtube.com/embed/iHhcHTlGtRs";

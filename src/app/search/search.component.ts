@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../shared/data.service';
 import { Http,Headers, Response } from '@angular/http';
 import 'rxjs/Rx';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search',
@@ -23,16 +24,39 @@ export class SearchComponent implements OnInit {
   city:string = "";
   locationLong:string = "";
 
+  itemsPerPage:number = 11;
+  playVideo:boolean = false;
+
+  playVideoArr:boolean[];
+
+  url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1";
+  // url: string = "https://www.youtube.com/embed/a2e0lokMiV0?autoplay=0";
+
+
   constructor(  private http: Http,
-                private dataService:DataService
+                private dataService:DataService,
+                private _sanitizer: DomSanitizer
   ) {}
+  onPlay(i) {
+    // this.playVideo = true;
+    // console.log(i);
+    this.playVideoArr = [];
+    for(let i=0; i< this.itemsPerPage; i++){
+      this.playVideoArr.push(false);
+    }
+    this.playVideoArr[i] = true;
+    // console.log(this.playVideoArr);
+  }
+  safeUrl() {
+    return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  }
 
   getJobsLocal(keyword:string, location:string){
     let myHeaders: Headers = new Headers();
     myHeaders.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
-    console.log(keyword);
-    console.log(location);
-    console.log(this.urlBase+"?search="+ keyword +location)
+    // console.log(keyword);
+    // console.log(location);
+    // console.log(this.urlBase+"?search="+ keyword +location)
 
     // return this.http.get("https://app.tradedesk.io/api/job?search=&location__city=Ottawa", {headers: myHeaders})
     return this.http.get(this.urlBase+"?search="+ keyword +location +"&page_size=20" , {headers: myHeaders})
@@ -47,18 +71,24 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.playVideoArr = [];
+    for(let i=0; i< this.itemsPerPage; i++){
+      this.playVideoArr.push(false);
+    }
+    // console.log(this.playVideoArr);
+
 
     this.dataService.getJobsFromTradedesk("", "")
       .subscribe(
         (data)=>{
           // this.dataSource = data;
           this.jobs = data;
-          // console.log(data);
+          console.log(data);
         }
       )
 
         this.jobs = this.dataService.getJobs();
-        console.log(this.jobs);
+        // console.log(this.jobs);
 
     // this.getJobsLocalLocal()
     //   .subscribe(

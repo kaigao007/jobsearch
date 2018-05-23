@@ -19,23 +19,46 @@
 
 </div> -->
 
-<section *ngFor="let job of jobs | paginate:{itemsPerPage:10, currentPage:p}" class="switchable feature-large">
+<section *ngFor="let job of jobs | paginate:{itemsPerPage:itemsPerPage, currentPage:p}; let i = index; let e=even; let o=odd; " class="switchable feature-large" [class.bg--secondary]="o">
   <div class="container">
     <div class="row">
       <div class="col-sm-6 col-xs-12">
         <div class="video-cover border--round box-shadow-wide">
-          <div class="background-image-holder"style="background: url('../assets/img/blog-3.jpg'); opacity: 1;"> <img alt="image" src="../assets/img/blog-3.jpg"> </div>
-          <div class="video-play-icon"></div> <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowfullscreen="allowfullscreen"></iframe> </div>
+          <div *ngIf="!playVideoArr[i]; then showBackground else showVideo"></div>
+          <ng-template #showBackground>
+            <div class="background-image-holder" style="background: url('../assets/img/blog-3.jpg'); opacity: 1; "> </div>
+            <div class="video-play-icon" (click)="onPlay(i)"></div>
+            <iframe src="" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+
+          </ng-template>
+          <ng-template #showVideo>
+            <!-- <div>test</div> -->
+            <iframe [src]="safeUrl()" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+
+          </ng-template>
+
+          <!-- <div class="background-image-holder"style="background: url('../assets/img/blog-3.jpg'); opacity: 1;"> <img alt="image" src="../assets/img/blog-3.jpg"> </div>
+          <div class="video-play-icon"></div> <iframe data-src="https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1" allowfullscreen="allowfullscreen"></iframe> -->
+        </div>
       </div>
       <div class="col-sm-6 col-md-5">
-        <div class="switchable__text">
+        <div class="jobListItem">
+          <!-- <div>Index: {{i}}</div> -->
+
+          <!-- <div>Row {{i}} : Name: {{job.title}}, is even row: {{e}}, is odd row: {{o}}</div> -->
           <h2>{{job.title}}</h2>
-          <p><b>Salary: {{job.pay_rate_type | capitalize |removeMinus }}  <span class="pull-right">Job Type: {{job.job_types[0]?.title}}</span></b></p>
-          <p><b>Start Date: {{job.start_date}}  <span class="pull-right">Employer: {{job.employer.first_name}}</span></b></p>
-          <p><b>Location: {{job.job_location}}</b></p>
+          <p><b>Employer: </b>{{job.employer.first_name}}</p>
+          <p><b>Job Type: </b>{{job.job_types[0]?.title}} <span class="pull-right"><b>Salary: </b> {{job.pay_rate_type | capitalize |removeMinus }} </span></p>
+          <p><b>Location: </b>{{job.job_location}}</p>
+          <p><b>Start Date: </b>{{job.start_date}} </p>
+          <p style="color:#a5a5a5f0">Job poster {{job.published | diffDays}} days ago</p>
+
+
+          <!-- <p><b>Salary: {{job.pay_rate_type | capitalize |removeMinus }}  <span class="pull-right">Job Type: {{job.job_types[0]?.title}}</span></b></p> -->
+
           <br>
           <p><b><a [routerLink]="['/description', job.id]"  style="text-decoration:none">Apply Easily &gt;&gt;</a></b></p>
-          <!-- {{job.description | extractSpan }}  -->
+          <!-- {{job.description | extractSummary }} -->
         </div>
       </div>
     </div>
