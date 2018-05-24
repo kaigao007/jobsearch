@@ -25,14 +25,17 @@ export class SearchComponent implements OnInit {
   locationLong:string = "";
 
   itemsPerPage:number = 11;
-  playVideo:boolean = false;
+  // playVideo:boolean = false;
 
   playVideoArr:boolean[];
 
   url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1";
-  // url: string = "https://www.youtube.com/embed/a2e0lokMiV0?autoplay=0";
+  // url: string = "https://www.youtube.com/embed/a2e0lokMiV0?autoplay=1";
+  // url: string = "https://www.youtube.com/embed/f3VKoU1jNz8?autoplay=1";
 
 
+
+  // safedUrl:string = "";
   constructor(  private http: Http,
                 private dataService:DataService,
                 private _sanitizer: DomSanitizer
@@ -45,11 +48,11 @@ export class SearchComponent implements OnInit {
       this.playVideoArr.push(false);
     }
     this.playVideoArr[i] = true;
-    // console.log(this.playVideoArr);
+    console.log(this.playVideoArr);
   }
-  safeUrl() {
-    return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
-  }
+  // safeUrl() {
+  //   return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  // }
 
   getJobsLocal(keyword:string, location:string){
     let myHeaders: Headers = new Headers();
@@ -75,6 +78,7 @@ export class SearchComponent implements OnInit {
     for(let i=0; i< this.itemsPerPage; i++){
       this.playVideoArr.push(false);
     }
+    this.safedUrl = this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
     // console.log(this.playVideoArr);
 
 

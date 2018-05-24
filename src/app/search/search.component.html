@@ -33,7 +33,8 @@
           </ng-template>
           <ng-template #showVideo>
             <!-- <div>test</div> -->
-            <iframe [src]="safeUrl()" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+            <!-- <iframe [src]="safeUrl()" frameborder="0" allowfullscreen="allowfullscreen"></iframe> -->
+            <iframe [src]="url | safe:'resourceUrl'" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 
           </ng-template>
 
