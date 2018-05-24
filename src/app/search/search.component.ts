@@ -83,7 +83,7 @@ export class SearchComponent implements OnInit {
         (data)=>{
           // this.dataSource = data;
           this.jobs = data;
-          console.log(data);
+          // console.log(data);
         }
       )
 
@@ -137,7 +137,7 @@ export class SearchComponent implements OnInit {
     //capitalize location city
     // console.log(value.location);
     const location = value.location.replace(/\s+/g, '%20'); //.charAt(0).toUpperCase() + value.location.toLowerCase().slice(1); //remove this comment if the backend become case insensitive
-    console.log(location);
+    // console.log(location);
     if(location){
        this.locationLong = "&location__city=" +  location;
     }

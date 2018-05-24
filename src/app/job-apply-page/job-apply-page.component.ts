@@ -18,9 +18,9 @@ export class JobApplyPageComponent implements OnInit {
   ngOnInit() {
     this.jobId = this.routeInfo.snapshot.params["id"];
 
-    console.log(this.jobId);
+    // console.log(this.jobId);
     this.job = this.dataService.getJob(this.jobId);
-    console.log(this.job);
+    // console.log(this.job);
   }
 
 }
