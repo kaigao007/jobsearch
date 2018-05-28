@@ -9,7 +9,7 @@
         <div class="video-cover border--round">
           <div *ngIf="!playVideo; then showBackground else showVideo"></div>
           <ng-template #showBackground>
-            <div class="background-image-holder" style="background: url('../assets/img/cowork-5.jpg'); opacity: 1; ">
+            <div class="background-image-holder" style="background: url('../assets/img/video_image_sm-min.jpg'); opacity: 1; ">
               <img alt="image" src="../assets/img/cowork-5.jpg"> </div>
             <div class="video-play-icon" (click)="onPlay()"></div>
             <iframe src="" frameborder="0" allowfullscreen="allowfullscreen"></iframe>

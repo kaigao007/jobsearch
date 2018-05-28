@@ -12,14 +12,17 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class JobDescPageComponent implements OnInit {
   jobId: number;
   job: any;
-  url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1&mute=0";
+  // url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1&mute=0";
+  url: string = "https://www.youtube.com/embed/4f49y5cY8QI?autoplay=1";
+
+
   // url: string = "https://www.youtube.com/embed/a2e0lokMiV0?autoplay=1&mute=0";
 
 
 
-  url2: string = "https://www.youtube.com/embed/6p45ooZOOPo"
+  // url2: string = "https://www.youtube.com/embed/6p45ooZOOPo"
   // videoURL:string = "https://www.youtube.com/watch?v=NuIAYHVeFYs";
-  videoURL: string = "https://www.youtube.com/embed/iHhcHTlGtRs";
+  // videoURL: string = "https://www.youtube.com/embed/iHhcHTlGtRs";
 
 
   playVideo: boolean = false;
@@ -38,9 +41,9 @@ export class JobDescPageComponent implements OnInit {
     //     document.body.appendChild(testScript);
   }
 
-  safeUrl() {
-    return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
-  }
+  // safeUrl() {
+  //   return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
+  // }
 
   ngOnInit() {
     // var s = document.createElement("script");

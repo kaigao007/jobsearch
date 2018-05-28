@@ -29,9 +29,9 @@ export class SearchComponent implements OnInit {
 
   playVideoArr:boolean[];
 
-  url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=1";
+  // url: string = "https://www.youtube.com/embed/6p45ooZOOPo?autoplay=0";
   // url: string = "https://www.youtube.com/embed/a2e0lokMiV0?autoplay=1";
-  // url: string = "https://www.youtube.com/embed/f3VKoU1jNz8?autoplay=1";
+  url: string = "https://www.youtube.com/embed/f3VKoU1jNz8?autoplay=1";
 
 
 
@@ -40,6 +40,13 @@ export class SearchComponent implements OnInit {
                 private dataService:DataService,
                 private _sanitizer: DomSanitizer
   ) {}
+
+  resetVideos(){
+    this.playVideoArr = [];
+    for(let i=0; i< this.itemsPerPage; i++){
+      this.playVideoArr.push(false);
+    }
+  }
   onPlay(i) {
     // this.playVideo = true;
     // console.log(i);
@@ -48,7 +55,7 @@ export class SearchComponent implements OnInit {
       this.playVideoArr.push(false);
     }
     this.playVideoArr[i] = true;
-    console.log(this.playVideoArr);
+    // console.log(this.playVideoArr);
   }
   // safeUrl() {
   //   return this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
@@ -78,7 +85,7 @@ export class SearchComponent implements OnInit {
     for(let i=0; i< this.itemsPerPage; i++){
       this.playVideoArr.push(false);
     }
-    this.safedUrl = this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    // this.safedUrl = this._sanitizer.bypassSecurityTrustResourceUrl(this.url);
     // console.log(this.playVideoArr);
 
 
@@ -87,7 +94,7 @@ export class SearchComponent implements OnInit {
         (data)=>{
           // this.dataSource = data;
           this.jobs = data;
-          // console.log(data);
+          console.log(data);
         }
       )
 

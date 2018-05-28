@@ -24,6 +24,7 @@ import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 import { SafePipe } from './pipe/safe.pipe';
 import { ExtractSummaryPipe } from './pipe/extract-summary.pipe';
 import { DiffDaysPipe } from './pipe/diff-days.pipe';
+import { ChoseUrlPipe } from './pipe/chose-url.pipe';
 
 
 const routeConfig:Routes=[
@@ -51,7 +52,8 @@ const routeConfig:Routes=[
     SafeHtmlPipe,
     SafePipe,
     ExtractSummaryPipe,
-    DiffDaysPipe
+    DiffDaysPipe,
+    ChoseUrlPipe
   ],
   imports: [
     BrowserModule,

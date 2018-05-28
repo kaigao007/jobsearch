@@ -34,7 +34,10 @@
           <ng-template #showVideo>
             <!-- <div>test</div> -->
             <!-- <iframe [src]="safeUrl()" frameborder="0" allowfullscreen="allowfullscreen"></iframe> -->
-            <iframe [src]="url | safe:'resourceUrl'" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+            <iframe [src]="job.title | choseUrl | safe:'resourceUrl'" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+            <!-- original -->
+            <!-- <iframe [src]="url | safe:'resourceUrl'" frameborder="0" allowfullscreen="allowfullscreen"></iframe> -->
+
 
           </ng-template>
 
@@ -65,7 +68,7 @@
     </div>
   </div>
 </section>
-<pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+<pagination-controls class="pull-right" (pageChange)="p = $event" (click)="resetVideos()"></pagination-controls>
 
 <!-- <hr><hr> -->
 
