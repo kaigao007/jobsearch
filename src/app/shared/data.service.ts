@@ -15,7 +15,7 @@ export class DataService {
     let myHeaders: Headers = new Headers();
     myHeaders.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
 
-    return this.http.get("https://app.tradedesk.io/api/job" + "?search=" + keyword + location + "&page_size=80", { headers: myHeaders })
+    return this.http.get("https://imi.rhonda.ai/api/job" + "?search=" + keyword + location + "&page_size=80", { headers: myHeaders })
       .map(
         (response: Response) => {
           const data = response.json().results;
@@ -45,7 +45,7 @@ export class DataService {
     myHeaders.append("Authorization", "Token 111bb68520a5f7fe63fbd85325118c5f25e56d9e");
 
     return new Promise((resolve, reject) => {
-      this.http.get("https://app.tradedesk.io/api/job" + "/?id=" + id, { headers: myHeaders }).map(res => res.json()).subscribe(
+      this.http.get("https://imi.rhonda.ai/api/job" + "/?id=" + id, { headers: myHeaders }).map(res => res.json()).subscribe(
         data => {
           resolve(data.results[0]);
         },

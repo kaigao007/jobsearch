@@ -26,7 +26,7 @@
         <div class="video-cover border--round box-shadow-wide">
           <div *ngIf="!playVideoArr[i]; then showBackground else showVideo"></div>
           <ng-template #showBackground>
-            <div class="background-image-holder" style="background: url('../assets/img/blog-3.jpg'); opacity: 1; "> </div>
+            <div class="background-image-holder" style="background: url('../assets/img/imi-Rhonda-Artificial-Intelligence-Video-preview-min.jpg'); opacity: 1; "> </div>
             <div class="video-play-icon" (click)="onPlay(i)"></div>
             <iframe src="" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
 
@@ -68,7 +68,7 @@
     </div>
   </div>
 </section>
-<pagination-controls class="pull-right" (pageChange)="p = $event" (click)="resetVideos()"></pagination-controls>
+<!-- <pagination-controls class="pull-right" (pageChange)="p = $event" (click)="resetVideos()"></pagination-controls> -->
 
 <!-- <hr><hr> -->
 
@@ -164,10 +164,14 @@
   </div>
 </section> -->
 
-<section class="cta cta-4 space--xxs border--bottom text-right">
+<section *ngIf="jobs" class="cta cta-4 space--xxs border--bottom text-right">
   <div class="container">
     <div class="row">
       <!-- <div class="col-sm-12"> <span>Results Page: 1 2 3 4 5 <b>Next »</b></span> </div> -->
+      <pagination-controls class="pull-right" (pageChange)="p = $event" (click)="resetVideos()"></pagination-controls>
+
+
+
     </div>
   </div>
 </section>

@@ -24,7 +24,7 @@ export class SearchComponent implements OnInit {
   city:string = "";
   locationLong:string = "";
 
-  itemsPerPage:number = 11;
+  itemsPerPage:number = 10;
   // playVideo:boolean = false;
 
   playVideoArr:boolean[];
@@ -94,7 +94,7 @@ export class SearchComponent implements OnInit {
         (data)=>{
           // this.dataSource = data;
           this.jobs = data;
-          console.log(data);
+          // console.log(data);
         }
       )
 
